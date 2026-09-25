@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>Farvevælgeren</header>
-<h1>skriv tre tal mellem 0 og 255 for at finde frem til din farve!</h1>
+<h1>Skriv tre tal for at finde frem til din farve!</h1>
 
  <label for="rød">Tal 1:<input id="rød" name="rød" type="number" min="0" max="255" /></label>
  <label for="grøn">Tal 2:<input id="grøn" name="grøn" type="number" min="0" max="255"/></label>
@@ -59,7 +59,7 @@
         console.log(Blåinput.value);
 
         if (Rødinput.value > 255 || Grøninput.value > 255 || Blåinput.value > 255){
-        output.textContent ="Ugyldigt tal";
+        output.textContent ="Tallet skal være mellem 0 og 255!";
         return;
         }
 
