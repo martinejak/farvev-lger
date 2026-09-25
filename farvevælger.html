@@ -23,7 +23,7 @@
 <div id = "farvefelt" ></div>
 
 <script>
-    //farve klasser! de indholder 4 klasser
+    //farveklassen samler navn og de 3 grb værdier
     class Farve {
         constructor(navn, rød, grøn, blå){
             this.navn = navn;
@@ -32,7 +32,7 @@
 	        this.blå = blå;
             }
         }
-    //farve array med rgb og ekstra farver
+    //farve array med definerede farver og deres rgb-værdier
     const farve = [];
     farve [0] = new Farve("rød",255, 0, 0);
     farve [1] = new Farve("grøn", 0, 255, 0);
@@ -42,7 +42,7 @@
     farve [4] = new Farve("magenta", 255, 0, 255);
     farve [5] = new Farve("cyan", 0, 255, 255);
 
-    //giver JS adgang til elementer i HTML
+    //giver JS adgang til elementerne der er i HTML
     const enter = document.getElementById("enter");
     const output = document.getElementById("output");
     const farveFelt = document.getElementById("farvefelt");
@@ -52,7 +52,7 @@
     const Blåinput = document.getElementById("blå");
 
 
-    //alt der skal ske er indeni eventet
+    //det der skal ske når brugeren klikker på knappen "enter"
     enter.addEventListener("click", function(){
         console.log(Rødinput.value);
         console.log(Grøninput.value);
@@ -63,6 +63,7 @@
         return;
         }
 
+        //gemmer brugerens rgb-værdier som en farve
         const inputFarve = new Farve("ukendt", Rødinput.value, Grøninput.value, Blåinput.value);
 
         farveFelt.style.backgroundColor = `rgb(${inputFarve.rød}, ${inputFarve.grøn}, ${inputFarve.blå})`;
@@ -84,7 +85,7 @@
             }
         } 
 
-        //viser navnet på den endelige tætteste farve
+        //viser navnet på den endelige tætteste defineret farve (rød, grøn, blå, gul, magenta eller cyan)
         output.textContent = "farven minder mest om " + mindsteFarve.navn;
     });
     
