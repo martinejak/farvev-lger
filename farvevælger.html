@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>opgave 7</title>
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+<header>Farvevælgeren</header>
+<h1>skriv tre tal mellem 0 og 255 for at finde frem til din farve!</h1>
+
+ <label for="rød">Tal 1:<input id="rød" name="rød" type="number" min="0" max="255" /></label>
+ <label for="grøn">Tal 2:<input id="grøn" name="grøn" type="number" min="0" max="255"/></label>
+ <label for="blå">Tal 3:<input id="blå" name="blå" type="number" min="0" max="255"/></label>
+
+
+
+<button id="enter">enter</button>
+
+<div id="output"></div>
+
+<div id = "farvefelt" ></div>
+
+<script>
+    //farve klasser! de indholder 4 klasser
+    class Farve {
+        constructor(navn, rød, grøn, blå){
+            this.navn = navn;
+	        this.rød = rød;
+	        this.grøn = grøn;
+	        this.blå = blå;
+            }
+        }
+    //farve array med rgb og ekstra farver
+    const farve = [];
+    farve [0] = new Farve("rød",255, 0, 0);
+    farve [1] = new Farve("grøn", 0, 255, 0);
+    farve [2] = new Farve("blå", 0, 0, 255);
+
+    farve [3] = new Farve("gul", 255, 255,0);
+    farve [4] = new Farve("magenta", 255, 0, 255);
+    farve [5] = new Farve("cyan", 0, 255, 255);
+
+    //giver JS adgang til elementer i HTML
+    const enter = document.getElementById("enter");
+    const output = document.getElementById("output");
+    const farveFelt = document.getElementById("farvefelt");
+
+    const Rødinput = document.getElementById("rød");
+    const Grøninput = document.getElementById("grøn");
+    const Blåinput = document.getElementById("blå");
+
+
+    //alt der skal ske er indeni eventet
+    enter.addEventListener("click", function(){
+        console.log(Rødinput.value);
+        console.log(Grøninput.value);
+        console.log(Blåinput.value);
+
+        if (Rødinput.value > 255 || Grøninput.value > 255 || Blåinput.value > 255){
+        output.textContent ="Ugyldigt tal";
+        return;
+        }
+
+        const inputFarve = new Farve("ukendt", Rødinput.value, Grøninput.value, Blåinput.value);
+
+        farveFelt.style.backgroundColor = `rgb(${inputFarve.rød}, ${inputFarve.grøn}, ${inputFarve.blå})`;
+
+        let mindsteAfstand = Infinity; 
+        let mindsteFarve;
+
+        //loop tjekker alle pladserne i arrayet
+        for (let i = 0; i < farve.length; i++){
+            const forskelRød = Math.abs(inputFarve.rød - farve[i].rød);
+            const forskelGrøn = Math.abs(inputFarve.grøn - farve[i].grøn);
+            const forskelBlå = Math.abs(inputFarve.blå - farve[i].blå); 
+
+            const afstand = forskelRød + forskelGrøn + forskelBlå;
+
+            if (afstand < mindsteAfstand){
+            mindsteAfstand = afstand;
+            mindsteFarve = farve[i];
+            }
+        } 
+
+        //viser navnet på den endelige tætteste farve
+        output.textContent = "farven minder mest om " + mindsteFarve.navn;
+    });
+    
+</script>
+</body>
+</html>
